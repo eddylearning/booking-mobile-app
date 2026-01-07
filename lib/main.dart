@@ -1,10 +1,17 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'screens/login_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/constants/theme_data.dart'; 
+import 'package:flutter_application_1/providers/them_provider.dart';
+import 'package:flutter_application_1/screens/home_screen.dart';
+import 'package:flutter_application_1/screens/signup_screen.dart';  
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,12 +19,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      title: 'Flutter Screens Example',
-      initialRoute: '/login',
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+
+      theme: ThemeStyles.lightTheme,
+      darkTheme: ThemeStyles.darkTheme,
+      themeMode: themeProvider.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+
+      // ROUTES
+      initialRoute: '/',
       routes: {
-        '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
+        '/': (context) => const HomeScreen(),
+        '/signup': (context) => const SignUpScreen(),  // <-- FIXED (no extra comma)
       },
     );
   }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694566494000",
+    "project_id": "shopke-4b83a",
+    "storage_bucket": "shopke-4b83a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694566494000:android:6191b0ca76a2e1bb3d72f5",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9n9jv6Uu3NiMxLolkyzhUlRfY70dkMVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
