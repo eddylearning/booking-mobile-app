@@ -7,6 +7,7 @@ import 'package:flutter_application_1/screens/profile_screen.dart';
 import 'package:flutter_application_1/screens/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
+  static const routeName = '/root';
   const RootScreen({super.key});
 
   @override
@@ -23,7 +24,7 @@ class _RootScreenState extends State<RootScreen> {
     void initState(){
 
       screens = const[
-        Homepage(),
+        HomeScreen(),
         SearchScreen(),
         CartScreen(),
         ProfileScreen(),
