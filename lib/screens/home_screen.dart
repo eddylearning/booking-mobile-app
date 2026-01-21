@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/providers/theme_provider.dart';
 
@@ -30,14 +31,14 @@ class HomeScreen extends StatelessWidget {
 
      ElevatedButton(
       onPressed: () {
-      Navigator.pushNamed(context, "/signup");
+      Navigator.pushNamed(context, RegisterScreen.routeName);
       },
       child: const Text("Create Account"),
       ),
 
 
           Text(
-            "Welcome to Shop App",
+            "Welcome to Agri shop App",
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,

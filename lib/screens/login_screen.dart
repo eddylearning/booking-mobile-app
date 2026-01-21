@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/my_validators.dart';
+import 'package:flutter_application_1/screens/forgot_password_screen.dart';
 import 'package:flutter_application_1/screens/signup_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +62,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+
+    //focus Nodes
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
     super.initState();
@@ -71,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (mounted) {
       _emailController.dispose();
       _passwordController.dispose();
+      //Focus Nodes
       _emailFocusNode.dispose();
       _passwordFocusNode.dispose();
     }
@@ -83,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!isValid) return;
 
     setState(() => _isLoading = true);
+    
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
@@ -175,8 +180,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextButton(
                             onPressed: () {
                               // TODO: Implement Forgot Password
+                              Navigator.pushNamed(
+                                context,
+                                ForgotPasswordScreen.routeName,
+                              );
                             },
-                            child: const SubtitleTextWidget(label: "Forgot password?", fontStyle: FontStyle.italic, textDecoration: TextDecoration.underline),
+                            child: const SubtitleTextWidget(label: "Forgot password?",
+                             fontStyle: FontStyle.italic, 
+                             textDecoration: TextDecoration.underline),
                           ),
                         ),
                         const SizedBox(height: 16.0),
@@ -203,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     foregroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0), side: BorderSide(color: Colors.grey.shade300))
                                   ),
-                                  icon: const Image(image: AssetImage('assets/images/google.png'), width: 24), // Ensure you have this asset
+                                  // icon: const Image(image: AssetImage('assets/images/google.png'), width: 24), // Ensure you have this asset
                                   label: const Text("Google"),
                                   onPressed: () async => await _googleSignInFct(context),
                                 ),
@@ -229,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               const SubtitleTextWidget(label: "Don't have an account?"),
                               TextButton(
-                                onPressed: () => Navigator.pushNamed(context, RegisterScreen.routName),
+                                onPressed: () => Navigator.pushNamed(context, RegisterScreen.routeName),
                                 child: const SubtitleTextWidget(label: "Create One?", fontStyle: FontStyle.italic, textDecoration: TextDecoration.underline),
                               ),
                             ],

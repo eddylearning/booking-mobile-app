@@ -46,6 +46,7 @@ dependencies:
   cloudinary: ^1.2.0
   image_picker: ^1.2.1
   firebase_auth: ^6.0.0
+  ionicons: ^0.2.2
 
 
 dev_dependencies:

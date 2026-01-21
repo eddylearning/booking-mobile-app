@@ -45,6 +45,12 @@ import 'package:flutter_application_1/providers/user_provider.dart';
 // import 'package:flutter_application_1/theme/theme_styles.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
+// import 'package:flutter_application_1/screens/login_screen.dart';
+import 'package:flutter_application_1/screens/signup_screen.dart';
+import 'package:flutter_application_1/screens/forgot_password_screen.dart';
+// import 'package:flutter_application_1/screens/home_screen.dart';
+// import 'package:flutter_application_1/root_screen.dart';
+
 
 void main() {
   runApp(
@@ -75,7 +81,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeStyles.lightTheme,
       darkTheme: ThemeStyles.darkTheme,
       themeMode: themeProvider.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
-      home: userProvider.isLoggedIn ? const HomeScreen() : const RootScreen(),
+
+      initialRoute: userProvider.isLoggedIn ?  RootScreen.routeName :  LoginScreen.routName,
+
+      routes:{
+        LoginScreen.routName: (Context) => LoginScreen(),
+        RegisterScreen.routeName: (Context) => const RegisterScreen(),
+        ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
+        RootScreen.routeName: (context) => const RootScreen(),
+      } ,
     );
   }
 }

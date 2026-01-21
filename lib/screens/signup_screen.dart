@@ -166,7 +166,7 @@ import 'package:flutter_application_1/widgets/image_picker.dart'; // PickImageWi
 
 
 class RegisterScreen extends StatefulWidget {
-  static const routName = "/RegisterScreen";
+  static const routeName = "/RegisterScreen";
   const RegisterScreen({super.key});
 
   @override
