@@ -3,74 +3,115 @@ import 'package:flutter_application_1/screens/signup_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/providers/theme_provider.dart';
 
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final themeProvider = Provider.of<ThemeProvider>(context);
+
+//     return Scaffold(
+//       body: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+
+//           // Your banner image
+//           Container(
+//             height: 200,
+//             width: double.infinity,
+//             decoration: BoxDecoration(
+//               image: DecorationImage(
+//                 image: AssetImage("assets/images/ham.jpg"),
+//                 fit: BoxFit.cover,
+//               ),
+//             ),
+//           ),
+
+//           const SizedBox(height: 20),
+
+//      ElevatedButton(
+//       onPressed: () {
+//       Navigator.pushNamed(context, RegisterScreen.routeName);
+//       },
+//       child: const Text("Create Account"),
+//       ),
+
+
+//           Text(
+//             "Welcome to Agri shop App",
+//             style: TextStyle(
+//               fontSize: 28,
+//               fontWeight: FontWeight.bold,
+//               color: Theme.of(context).textTheme.bodyLarge!.color,
+//             ),
+//           ),
+
+//           const SizedBox(height: 20),
+
+//           // Dark/Light toggle with icon
+//           ElevatedButton.icon(
+//             onPressed: () {
+//               themeProvider.toggleTheme();
+//             },
+//             icon: Icon(
+//               themeProvider.isDarkTheme ? Icons.nights_stay : Icons.wb_sunny,
+//               color: Colors.white,
+//             ),
+//             label: Text(
+//               themeProvider.isDarkTheme ? "Dark Mode" : "Light Mode",
+//               style: const TextStyle(
+//                 fontWeight: FontWeight.bold,
+//                 fontSize: 16,
+//               ),
+//             ),
+//             style: ElevatedButton.styleFrom(
+//               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+// // https://console.firebase.google.com/project/shopke-4b83a/overview?hl=en
+
+
+
+// without scaffold
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-          // Your banner image
-          Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/ham.jpg"),
-                fit: BoxFit.cover,
-              ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 200,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/ham.jpg"),
+              fit: BoxFit.cover,
             ),
           ),
-
-          const SizedBox(height: 20),
-
-     ElevatedButton(
-      onPressed: () {
-      Navigator.pushNamed(context, RegisterScreen.routeName);
-      },
-      child: const Text("Create Account"),
-      ),
-
-
-          Text(
-            "Welcome to Agri shop App",
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.bodyLarge!.color,
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // Dark/Light toggle with icon
-          ElevatedButton.icon(
-            onPressed: () {
-              themeProvider.toggleTheme();
-            },
-            icon: Icon(
-              themeProvider.isDarkTheme ? Icons.nights_stay : Icons.wb_sunny,
-              color: Colors.white,
-            ),
-            label: Text(
-              themeProvider.isDarkTheme ? "Dark Mode" : "Light Mode",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, RegisterScreen.routeName);
+          },
+          child: const Text("Create Account"),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          "Welcome to Agri shop App",
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }
-// https://console.firebase.google.com/project/shopke-4b83a/overview?hl=en

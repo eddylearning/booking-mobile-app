@@ -314,9 +314,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 5),
                   const Text("AgriConnect", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -324,15 +324,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SubtitleTextWidget(label: "Join the farming community"),
                     ]),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   SizedBox(
-                    height: size.width * 0.3,
-                    width: size.width * 0.3,
+                    height: size.width * 0.2,
+                    width: size.width * 0.2,
                     child: PickImageWidget(
                       pickedImageBytes: _pickedImageBytes,
                       onTap: () async => await LocalImagePicker(),
                     ),
                   ),
+                  const SizedBox(height:20),
                   Form(
                     key: _formkey,
                     child: Column(
@@ -345,7 +346,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_emailFocusNode),
                           validator: (value) => MyValidators.displayNamevalidator(value),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 13.0),
                         TextFormField(
                           controller: _emailController,
                           focusNode: _emailFocusNode,
@@ -354,7 +355,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_passwordFocusNode),
                           validator: (value) => MyValidators.emailValidator(value),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 13.0),
                         TextFormField(
                           controller: _passwordController,
                           focusNode: _passwordFocusNode,
@@ -368,7 +369,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(_repeatPasswordFocusNode),
                           validator: (value) => MyValidators.passwordValidator(value),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 13.0),
                         TextFormField(
                           controller: _repeatPasswordController,
                           focusNode: _repeatPasswordFocusNode,
@@ -381,7 +382,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           validator: (value) => MyValidators.repeatPasswordValidator(value: value, password: _passwordController.text),
                         ),
-                        const SizedBox(height: 36.0),
+                        const SizedBox(height: 16.0),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton.icon(
