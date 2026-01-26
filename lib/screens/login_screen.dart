@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/my_validators.dart';
-import 'package:flutter_application_1/screens/forgot_password_screen.dart';
-import 'package:flutter_application_1/screens/signup_screen.dart';
+import 'package:fresh_farm_app/constants/my_validators.dart';
+import 'package:fresh_farm_app/screens/forgot_password_screen.dart';
+import 'package:fresh_farm_app/screens/signup_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-// CORRECTED IMPORTS FOR flutter_application_1
-// import 'package:flutter_application_1/constants/validator.dart';
-import 'package:flutter_application_1/providers/user_provider.dart';
-import 'package:flutter_application_1/root_screen.dart';
-// import 'package:flutter_application_1/screens/auth/register_screen.dart';
-// import 'package:flutter_application_1/widgets/loading_manager.dart';
-// import 'package:flutter_application_1/widgets/subtitle_text.dart';
-// import 'package:flutter_application_1/widgets/title_text.dart';
+// CORRECTED IMPORTS FOR fresh_farm_app
+// import 'package:fresh_farm_app/constants/validator.dart';
+import 'package:fresh_farm_app/providers/user_provider.dart';
+import 'package:fresh_farm_app/root_screen.dart';
+// import 'package:fresh_farm_app/screens/auth/register_screen.dart';
+// import 'package:fresh_farm_app/widgets/loading_manager.dart';
+// import 'package:fresh_farm_app/widgets/subtitle_text.dart';
+// import 'package:fresh_farm_app/widgets/title_text.dart';
 
 class LoadngManager extends StatelessWidget {
   final Widget child;

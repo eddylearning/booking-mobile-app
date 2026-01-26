@@ -158,11 +158,11 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:iconly/iconly.dart';
 
-import 'package:flutter_application_1/constants/my_validators.dart';
-import 'package:flutter_application_1/models/user_model.dart';
-import 'package:flutter_application_1/screens/login_screen.dart';
-import 'package:flutter_application_1/services/my_app_functions.dart';
-import 'package:flutter_application_1/widgets/image_picker.dart'; // PickImageWidget
+import 'package:fresh_farm_app/constants/my_validators.dart';
+import 'package:fresh_farm_app/models/user_model.dart';
+import 'package:fresh_farm_app/screens/login_screen.dart';
+import 'package:fresh_farm_app/services/my_app_functions.dart';
+import 'package:fresh_farm_app/widgets/image_picker.dart'; // PickImageWidget
 
 
 class RegisterScreen extends StatefulWidget {

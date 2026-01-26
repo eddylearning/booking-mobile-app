@@ -1,9 +1,9 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/constants/theme_data.dart';
-// import 'package:flutter_application_1/firebase_options.dart';
-// import 'package:flutter_application_1/providers/theme_provider.dart';
-// import 'package:flutter_application_1/providers/user_provider.dart';
-// import 'package:flutter_application_1/root_screen.dart';
+// import 'package:fresh_farm_app/constants/theme_data.dart';
+// import 'package:fresh_farm_app/firebase_options.dart';
+// import 'package:fresh_farm_app/providers/theme_provider.dart';
+// import 'package:fresh_farm_app/providers/user_provider.dart';
+// import 'package:fresh_farm_app/root_screen.dart';
 // import 'package:provider/provider.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
@@ -36,23 +36,31 @@
 //   }
 // }
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/theme_data.dart';
-import 'package:flutter_application_1/root_screen.dart';
+import 'package:fresh_farm_app/constants/theme_data.dart';
+import 'package:fresh_farm_app/firebase_options.dart';
+import 'package:fresh_farm_app/root_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_application_1/providers/theme_provider.dart';
-import 'package:flutter_application_1/providers/user_provider.dart';
-// import 'package:flutter_application_1/theme/theme_styles.dart';
-// import 'package:flutter_application_1/screens/home_screen.dart';
-import 'package:flutter_application_1/screens/login_screen.dart';
-// import 'package:flutter_application_1/screens/login_screen.dart';
-import 'package:flutter_application_1/screens/signup_screen.dart';
-import 'package:flutter_application_1/screens/forgot_password_screen.dart';
-// import 'package:flutter_application_1/screens/home_screen.dart';
-// import 'package:flutter_application_1/root_screen.dart';
+import 'package:fresh_farm_app/providers/theme_provider.dart';
+import 'package:fresh_farm_app/providers/user_provider.dart';
+// import 'package:fresh_farm_app/theme/theme_styles.dart';
+// import 'package:fresh_farm_app/screens/home_screen.dart';
+import 'package:fresh_farm_app/screens/login_screen.dart';
+// import 'package:fresh_farm_app/screens/login_screen.dart';
+import 'package:fresh_farm_app/screens/signup_screen.dart';
+import 'package:fresh_farm_app/screens/forgot_password_screen.dart';
+// import 'package:fresh_farm_app/screens/home_screen.dart';
+// import 'package:fresh_farm_app/root_screen.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     MultiProvider(
       providers: [

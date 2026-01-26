@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 // class ProfileScreen extends StatelessWidget {
 //   const ProfileScreen({super.key});
@@ -129,6 +129,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Using Theme colors for Dark Mode support
+    final theme = Theme.of(context);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
       child: Column(
@@ -136,10 +139,10 @@ class ProfileScreen extends StatelessWidget {
           // Profile Avatar
           CircleAvatar(
             radius: 55,
-            backgroundColor: Colors.blue.shade100,
-            child: const CircleAvatar(
+            backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
+            child: CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                 'https://i.pravatar.cc/300',
               ),
             ),
@@ -148,22 +151,21 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Name
-          const Text(
-            'user',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+          Text(
+            'John Doe', // TODO: Replace with actual user data from AuthProvider
+            style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
 
           const SizedBox(height: 6),
 
           // Email
-          const Text(
-            'user@email.com',
-            style: TextStyle(
-              color: Colors.grey,
-            ),
+          Text(
+            'john.doe@example.com', // TODO: Replace with actual user data
+            style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                ),
           ),
 
           const SizedBox(height: 24),
@@ -172,17 +174,20 @@ class ProfileScreen extends StatelessWidget {
           _buildInfoTile(
             icon: Icons.phone,
             title: 'Phone',
-            value: '+1 234 567 890',
+            value: '+254 700 000 000',
+            theme: theme,
           ),
           _buildInfoTile(
             icon: Icons.location_on,
             title: 'Location',
-            value: 'New York, USA',
+            value: 'Nairobi, Kenya',
+            theme: theme,
           ),
           _buildInfoTile(
             icon: Icons.person,
             title: 'Username',
-            value: '@userdoe',
+            value: '@johndoe',
+            theme: theme,
           ),
 
           const SizedBox(height: 30),
@@ -194,7 +199,7 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profile'),
               onPressed: () {
-                // Navigate to edit profile
+                // TODO: Navigate to Edit Profile Screen
               },
             ),
           ),
@@ -205,7 +210,8 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.logout),
               label: const Text('Logout'),
               onPressed: () {
-                // Handle logout
+                // TODO: Call AuthProvider to sign out
+                // Provider.of<AuthProvider>(context, listen: false).logout();
               },
             ),
           ),
@@ -221,10 +227,11 @@ class ProfileScreen extends StatelessWidget {
     required IconData icon,
     required String title,
     required String value,
+    required ThemeData theme,
   }) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: Colors.blue),
+      leading: Icon(icon, color: theme.colorScheme.primary),
       title: Text(title),
       subtitle: Text(value),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/app_manager.dart';
-import 'package:flutter_application_1/widgets/subtitle_text.dart';
-import 'package:flutter_application_1/widgets/title_text.dart';
+import 'package:fresh_farm_app/services/app_manager.dart';
+import 'package:fresh_farm_app/widgets/subtitle_text.dart';
+import 'package:fresh_farm_app/widgets/title_text.dart';
 
 class MyAppFunctions {
   static Future<void> showErrorOrWarningDialog({

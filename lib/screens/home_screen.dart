@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/signup_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_application_1/providers/theme_provider.dart';
+import 'package:fresh_farm_app/screens/signup_screen.dart';
+// import 'package:provider/provider.dart';
+// import 'package:fresh_farm_app/providers/theme_provider.dart';
 
 // class HomeScreen extends StatelessWidget {
 //   const HomeScreen({super.key});

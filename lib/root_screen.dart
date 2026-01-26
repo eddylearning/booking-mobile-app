@@ -88,11 +88,11 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_application_1/providers/theme_provider.dart';
-import 'package:flutter_application_1/screens/cart_screen.dart';
-import 'package:flutter_application_1/screens/home_screen.dart';
-import 'package:flutter_application_1/screens/profile_screen.dart';
-import 'package:flutter_application_1/screens/search_screen.dart';
+import 'package:fresh_farm_app/providers/theme_provider.dart';
+import 'package:fresh_farm_app/screens/cart_screen.dart';
+import 'package:fresh_farm_app/screens/home_screen.dart';
+import 'package:fresh_farm_app/screens/profile_screen.dart';
+import 'package:fresh_farm_app/screens/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
   static const routeName = '/root';
