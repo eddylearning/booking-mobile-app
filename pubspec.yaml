@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.0.5
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
+  intl: ^0.20.1
 
   # Firebase dependancies
   firebase_core: ^4.0.0
@@ -45,9 +46,11 @@ dependencies:
   http: ^1.6.0
   cloudinary: ^1.2.0
   image_picker: ^1.2.1
+  cached_network_image: ^3.4.1
   firebase_auth: ^6.0.0
+  cloud_functions: ^6.0.5
   ionicons: ^0.2.2
-
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_farm_app/services/app_manager.dart';
+// import 'package:fresh_farm_app/services/app_manager.dart';
+import 'package:fresh_farm_app/utils/asset_manager.dart';
 import 'package:fresh_farm_app/widgets/subtitle_text.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
 

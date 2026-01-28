@@ -1,145 +1,227 @@
+
 // import 'package:flutter/material.dart';
+
+// // Dummy Cart Item Model
+// // TODO: Import your actual CartItem model from data/models/cart_item.dart
+// class CartItem {
+//   final String name;
+//   final double price;
+//   final int quantity;
+
+//   CartItem({required this.name, required this.price, required this.quantity});
+// }
 
 // class CartScreen extends StatefulWidget {
 //   const CartScreen({super.key});
 
 //   @override
-//   State <CartScreen> createState() => CartScreenState();
+//   State<CartScreen> createState() => _CartScreenState();
 // }
 
-// class CartScreenState extends State <CartScreen> {
+// class _CartScreenState extends State<CartScreen> {
+//   // TODO: Fetch this list from CartProvider
+//   final List<CartItem> _cartItems = [
+//     CartItem(name: 'Fresh Apples', price: 150, quantity: 2),
+//     CartItem(name: 'Spinach', price: 50, quantity: 1),
+//   ];
+
+//   double get _totalPrice {
+//     return _cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
+//   }
+
 //   @override
 //   Widget build(BuildContext context) {
-//     return const Placeholder();
+//     return Scaffold(
+//       // Note: You mentioned "without scaffold", but CartScreen usually needs 
+//       // its own AppBar unless it's a nested tab. 
+//       // Adjust this wrapper based on your MainWrapper implementation.
+//       appBar: AppBar(
+//         title: const Text('My Cart'),
+//       ),
+//       body: _cartItems.isEmpty
+//           ? Center(
+//               child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   Icon(Icons.shopping_cart_outlined, 
+//                        size: 80, 
+//                        color: Colors.grey[400]),
+//                   const SizedBox(height: 16),
+//                   const Text('Your cart is empty'),
+//                 ],
+//               ),
+//             )
+//           : Column(
+//               children: [
+//                 Expanded(
+//                   child: ListView.builder(
+//                     padding: const EdgeInsets.all(16),
+//                     itemCount: _cartItems.length,
+//                     itemBuilder: (context, index) {
+//                       final item = _cartItems[index];
+//                       return Card(
+//                         margin: const EdgeInsets.only(bottom: 12),
+//                         child: ListTile(
+//                           leading: const Icon(Icons.circle, size: 10),
+//                           title: Text(item.name),
+//                           subtitle: Text("KES ${item.price} each"),
+//                           trailing: Row(
+//                             mainAxisSize: MainAxisSize.min,
+//                             children: [
+//                               Text("x${item.quantity}"),
+//                               const SizedBox(width: 10),
+//                               Text(
+//                                 "KES ${item.price * item.quantity}",
+//                                 style: const TextStyle(fontWeight: FontWeight.bold),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       );
+//                     },
+//                   ),
+//                 ),
+//                 // Checkout Section
+//                 Container(
+//                   padding: const EdgeInsets.all(20),
+//                   decoration: BoxDecoration(
+//                     color: Theme.of(context).colorScheme.surface,
+//                     boxShadow: [
+//                       BoxShadow(
+//                         color: Colors.black.withOpacity(0.05),
+//                         blurRadius: 10,
+//                       ),
+//                     ],
+//                   ),
+//                   child: Column(
+//                     children: [
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                         children: [
+//                           const Text('Total', 
+//                               style: TextStyle(fontSize: 18)),
+//                           Text(
+//                             'KES $_totalPrice',
+//                             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+//                                   fontWeight: FontWeight.bold,
+//                                   color: Theme.of(context).colorScheme.primary,
+//                                 ),
+//                           ),
+//                         ],
+//                       ),
+//                       const SizedBox(height: 16),
+//                       SizedBox(
+//                         width: double.infinity,
+//                         child: ElevatedButton(
+//                           onPressed: () {
+//                             // TODO: Navigate to Checkout Screen (M-Pesa Integration)
+//                             // Navigator.pushNamed(context, CheckoutScreen.routeName);
+//                           },
+//                           child: const Text('Proceed to Checkout'),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//     );
 //   }
 // }
 
 import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/widgets/subtitle_text.dart';
+import 'package:fresh_farm_app/widgets/title_text.dart';
+// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
+// import 'package:fresh_farm_app/widgets/subtitle_text_widget.dart';
 
-// Dummy Cart Item Model
-// TODO: Import your actual CartItem model from data/models/cart_item.dart
-class CartItem {
-  final String name;
-  final double price;
-  final int quantity;
-
-  CartItem({required this.name, required this.price, required this.quantity});
-}
-
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
+  static const routeName = '/cart_screen';
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  // TODO: Fetch this list from CartProvider
-  final List<CartItem> _cartItems = [
-    CartItem(name: 'Fresh Apples', price: 150, quantity: 2),
-    CartItem(name: 'Spinach', price: 50, quantity: 1),
-  ];
-
-  double get _totalPrice {
-    return _cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // Note: You mentioned "without scaffold", but CartScreen usually needs 
-      // its own AppBar unless it's a nested tab. 
-      // Adjust this wrapper based on your MainWrapper implementation.
-      appBar: AppBar(
-        title: const Text('My Cart'),
-      ),
-      body: _cartItems.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.shopping_cart_outlined, 
-                       size: 80, 
-                       color: Colors.grey[400]),
-                  const SizedBox(height: 16),
-                  const Text('Your cart is empty'),
-                ],
-              ),
-            )
-          : Column(
+    return Column(
+      children: [
+        // Title Section
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TitlesTextWidget(
+              label: "My Cart",
+              fontSize: 24,
+            ),
+          ),
+        ),
+
+        const Divider(),
+
+        // List Area
+        Expanded(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: _cartItems.length,
-                    itemBuilder: (context, index) {
-                      final item = _cartItems[index];
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        child: ListTile(
-                          leading: const Icon(Icons.circle, size: 10),
-                          title: Text(item.name),
-                          subtitle: Text("KES ${item.price} each"),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text("x${item.quantity}"),
-                              const SizedBox(width: 10),
-                              Text(
-                                "KES ${item.price * item.quantity}",
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 80,
+                  color: Colors.grey.withOpacity(0.5),
                 ),
-                // Checkout Section
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Total', 
-                              style: TextStyle(fontSize: 18)),
-                          Text(
-                            'KES $_totalPrice',
-                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // TODO: Navigate to Checkout Screen (M-Pesa Integration)
-                            // Navigator.pushNamed(context, CheckoutScreen.routeName);
-                          },
-                          child: const Text('Proceed to Checkout'),
-                        ),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 20),
+                const TitlesTextWidget(label: "Cart is empty"),
+                SubtitleTextWidget(
+                  label: "Start adding fresh products!",
+                  fontSize: 14,
+                  color: Colors.grey,
                 ),
               ],
             ),
+          ),
+        ),
+
+        // Sticky Checkout Area (Bottom of content)
+        Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: const Offset(0, -3), // Shadow pointing up
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const TitlesTextWidget(label: "Total:", fontSize: 16),
+                  const TitlesTextWidget(label: "KES 0.00", fontSize: 18),
+                ],
+              ),
+              const SizedBox(height: 15),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // TODO: Navigate to Checkout
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                  ),
+                  child: const TitlesTextWidget(label: "Checkout", fontSize: 16, color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 10), // Extra padding for bottom safe area
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

@@ -158,9 +158,9 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:iconly/iconly.dart';
 
-import 'package:fresh_farm_app/constants/my_validators.dart';
+import 'package:fresh_farm_app/utils/my_validators.dart';
 import 'package:fresh_farm_app/models/user_model.dart';
-import 'package:fresh_farm_app/screens/login_screen.dart';
+import 'package:fresh_farm_app/screens/auth/login_screen.dart';
 import 'package:fresh_farm_app/services/my_app_functions.dart';
 import 'package:fresh_farm_app/widgets/image_picker.dart'; // PickImageWidget
 

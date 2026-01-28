@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_farm_app/constants/my_validators.dart';
-import 'package:fresh_farm_app/screens/forgot_password_screen.dart';
-import 'package:fresh_farm_app/screens/signup_screen.dart';
+import 'package:fresh_farm_app/utils/my_validators.dart';
+import 'package:fresh_farm_app/screens/auth/forgot_password_screen.dart';
+import 'package:fresh_farm_app/screens/auth/signup_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';

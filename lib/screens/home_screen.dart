@@ -1,117 +1,128 @@
-import 'package:flutter/material.dart';
-import 'package:fresh_farm_app/screens/signup_screen.dart';
-// import 'package:provider/provider.dart';
-// import 'package:fresh_farm_app/providers/theme_provider.dart';
+// import 'package:flutter/material.dart';
+// import 'package:fresh_farm_app/screens/auth/signup_screen.dart';
 
+// // without scaffold
 // class HomeScreen extends StatelessWidget {
 //   const HomeScreen({super.key});
 
 //   @override
 //   Widget build(BuildContext context) {
-//     final themeProvider = Provider.of<ThemeProvider>(context);
-
-//     return Scaffold(
-//       body: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-
-//           // Your banner image
-//           Container(
-//             height: 200,
-//             width: double.infinity,
-//             decoration: BoxDecoration(
-//               image: DecorationImage(
-//                 image: AssetImage("assets/images/ham.jpg"),
-//                 fit: BoxFit.cover,
-//               ),
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Container(
+//           height: 200,
+//           width: double.infinity,
+//           decoration: const BoxDecoration(
+//             image: DecorationImage(
+//               image: AssetImage("assets/images/ham.jpg"),
+//               fit: BoxFit.cover,
 //             ),
 //           ),
-
-//           const SizedBox(height: 20),
-
-//      ElevatedButton(
-//       onPressed: () {
-//       Navigator.pushNamed(context, RegisterScreen.routeName);
-//       },
-//       child: const Text("Create Account"),
-//       ),
-
-
-//           Text(
-//             "Welcome to Agri shop App",
-//             style: TextStyle(
-//               fontSize: 28,
-//               fontWeight: FontWeight.bold,
-//               color: Theme.of(context).textTheme.bodyLarge!.color,
-//             ),
-//           ),
-
-//           const SizedBox(height: 20),
-
-//           // Dark/Light toggle with icon
-//           ElevatedButton.icon(
-//             onPressed: () {
-//               themeProvider.toggleTheme();
-//             },
-//             icon: Icon(
-//               themeProvider.isDarkTheme ? Icons.nights_stay : Icons.wb_sunny,
-//               color: Colors.white,
-//             ),
-//             label: Text(
-//               themeProvider.isDarkTheme ? "Dark Mode" : "Light Mode",
-//               style: const TextStyle(
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 16,
-//               ),
-//             ),
-//             style: ElevatedButton.styleFrom(
-//               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-//             ),
-//           ),
-//         ],
-//       ),
+//         ),
+//         const SizedBox(height: 20),
+//         ElevatedButton(
+//           onPressed: () {
+//             Navigator.pushNamed(context, RegisterScreen.routeName);
+//           },
+//           child: const Text("Create Account"),
+//         ),
+//         const SizedBox(height: 20),
+//         Text(
+//           "Welcome to Agri shop App",
+//           style: Theme.of(context)
+//               .textTheme
+//               .headlineSmall
+//               ?.copyWith(fontWeight: FontWeight.bold),
+//         ),
+//       ],
 //     );
 //   }
 // }
-// // https://console.firebase.google.com/project/shopke-4b83a/overview?hl=en
 
 
+import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/services/database_service.dart';
+import 'package:fresh_farm_app/widgets/product_card.dart';
+import 'package:fresh_farm_app/widgets/shimmer_loader.dart';
+import 'package:fresh_farm_app/widgets/subtitle_text.dart';
+import 'package:fresh_farm_app/widgets/title_text.dart';
+// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
+// import 'package:fresh_farm_app/widgets/subtitle_text_widget.dart';
 
-// without scaffold
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 200,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/ham.jpg"),
-              fit: BoxFit.cover,
-            ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          TitlesTextWidget(
+            label: "Fresh Produce",
+            fontSize: 24,
           ),
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, RegisterScreen.routeName);
-          },
-          child: const Text("Create Account"),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          "Welcome to Agri shop App",
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall
-              ?.copyWith(fontWeight: FontWeight.bold),
-        ),
-      ],
+          const SizedBox(height: 5),
+          SubtitleTextWidget(
+            label: "Fresh from the farm to your door",
+            fontSize: 14,
+            fontWeight: FontWeight.normal,
+            color: Colors.grey,
+          ),
+          const SizedBox(height: 20),
+
+          // Grid inside ScrollView needs shrinkWrap and NeverScrollableScrollPhysics
+          StreamBuilder(
+            stream: DatabaseService.instance.getProductsStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const ProductsShimmer();
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  heightFactor: 10,
+                  child: TitlesTextWidget(label: "Error loading products", color: Colors.red),
+                );
+              }
+              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Center(
+                  heightFactor: 10,
+                  child: TitlesTextWidget(label: "No products found.", color: Colors.grey),
+                );
+              }
+
+              final products = snapshot.data!.docs;
+
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(
+                    productId: product.id,
+                    title: product['name'],
+                    price: product['price'].toDouble(),
+                    imageUrl: product['imageUrl'] ?? 'https://via.placeholder.com/150',
+                    onTap: () {
+                      // TODO: Navigate to Product Detail
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
