@@ -4,8 +4,8 @@ import 'package:fresh_farm_app/screens/auth/forgot_password_screen.dart';
 import 'package:fresh_farm_app/screens/auth/signup_screen.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 // CORRECTED IMPORTS FOR fresh_farm_app
 // import 'package:fresh_farm_app/constants/validator.dart';
@@ -42,7 +42,7 @@ class SubtitleTextWidget extends StatelessWidget {
 // -------------------------------------------------
 
 class LoginScreen extends StatefulWidget {
-  static const routName = "/LoginScreen";
+  static const routeName = "/LoginScreen";
   const LoginScreen({super.key});
 
   @override
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (mounted) {
         // UserProvider now holds the role via fetchUserData
-        final user = userProvider.getUser;
+        // final user = userProvider.getUser;
         // Both admin and customer go to RootScreen, the Drawer will adapt
         Navigator.pushReplacementNamed(context, RootScreen.routeName);
       }

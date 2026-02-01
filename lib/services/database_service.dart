@@ -96,7 +96,7 @@ class DatabaseService {
       await _usersCollection.doc(uid).set({
         'uid': uid,
         'email': email,
-        'name': name,
+        'username': name,
         'role': 'customer', // Default role
         'createdAt': DateTime.now(),
       });
@@ -113,3 +113,6 @@ class DatabaseService {
     }
   }
 }
+
+//getter in DatabaseService if accessing collection directly in Provider
+  // CollectionReference get _usersCollection => db.collection('users');

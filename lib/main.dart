@@ -72,6 +72,8 @@ import 'package:fresh_farm_app/firebase_options.dart';
 import 'package:fresh_farm_app/providers/cart_provider.dart';
 import 'package:fresh_farm_app/providers/product_provider.dart';
 import 'package:fresh_farm_app/root_screen.dart';
+import 'package:fresh_farm_app/screens/order_screen.dart';
+import 'package:fresh_farm_app/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:fresh_farm_app/providers/theme_provider.dart';
 import 'package:fresh_farm_app/providers/user_provider.dart';
@@ -124,11 +126,11 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
 
       // Initial Route Logic
-      initialRoute: userProvider.isLoggedIn ? RootScreen.routeName : LoginScreen.routName,
+      initialRoute: userProvider.isLoggedIn ? RootScreen.routeName : LoginScreen.routeName,
 
       routes: {
         // Auth Routes
-        LoginScreen.routName: (ctx) => LoginScreen(),
+        LoginScreen.routeName: (ctx) => LoginScreen(),
         RegisterScreen.routeName: (ctx) => const RegisterScreen(),
         ForgotPasswordScreen.routeName: (ctx) => const ForgotPasswordScreen(),
         
@@ -139,6 +141,8 @@ class MyApp extends StatelessWidget {
         AdminDashboard.routeName: (ctx) => const AdminDashboard(),
         CartScreen.routeName: (ctx) => const CartScreen(), // Added for Drawer navigation
         // Add other routes (OrdersScreen, ProfileScreen) if needed
+         OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+        ProfileScreen.routeName: (ctx) => const ProfileScreen(),
       },
     );
   }

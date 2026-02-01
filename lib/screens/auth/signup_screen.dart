@@ -290,7 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Registered! Please verify your email before logging in.')),
         );
-        Navigator.pushReplacementNamed(context, LoginScreen.routName);
+        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
       }
     } catch (e) {
       if (mounted) {
@@ -323,6 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TitlesTextWidget(label: "Create Account"),
                       SubtitleTextWidget(label: "Join the farming community"),
                     ]),
+                    
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
@@ -391,6 +392,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             label: const Text("Sign up"),
                             onPressed: isLoading ? null : () async => await _registerFCT(),
                           ),
+                          
                         ),
                       ],
                     ),

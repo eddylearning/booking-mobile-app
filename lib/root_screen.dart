@@ -141,7 +141,14 @@ class _RootScreenState extends State<RootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // --- CHANGE 1: Assign the Drawer ---
-      drawer: const CustomerDrawer(),
+      drawer: CustomerDrawer(
+        onPageChange: (index){
+          setState(() {
+            currentScreen = index;
+          });
+          controller.jumpToPage(index);
+        },
+      ),
       
       appBar: AppBar(
         title: const Text("Agri Shop"),
@@ -201,6 +208,7 @@ class _RootScreenState extends State<RootScreen> {
           ),
         ],
       ),
+      drawerEnableOpenDragGesture: true, //ensures that swip works
     );
   }
 }

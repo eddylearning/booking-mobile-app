@@ -92,6 +92,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_farm_app/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -224,6 +225,36 @@ class UserProvider with ChangeNotifier {
   void clearUser() {
     _user = null;
     notifyListeners();
+  }
+
+  Future<void> updateProfile(
+    {required String username,
+     required String imageUrl})async {
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) return;
+
+      // 1. Update Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .update({
+        'username': username,
+        'userImage': imageUrl,
+      });
+
+      // 2. Refresh local state
+      await fetchUser();
+      
+      if (kDebugMode) {
+        print("Profile updated successfully");
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error updating profile: $e");
+      }
+      rethrow;
+    }
   }
 }
 

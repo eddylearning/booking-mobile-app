@@ -117,6 +117,9 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/screens/auth/login_screen.dart' hide TitlesTextWidget, SubtitleTextWidget;
+import 'package:fresh_farm_app/screens/auth/signup_screen.dart';
+import 'package:fresh_farm_app/screens/edit_profile_screen.dart';
 import 'package:fresh_farm_app/widgets/subtitle_text.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
 import 'package:provider/provider.dart';
@@ -135,95 +138,131 @@ class ProfileScreen extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     final UserModel? user = userProvider.getUser;
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Column(
-        children: [
-          // Profile Avatar
-          CircleAvatar(
-            radius: 55,
-            backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundImage: user?.userImage != null && user!.userImage.isNotEmpty
-                  ? NetworkImage(user.userImage)
-                  : null,
-              child: (user?.userImage == null || user!.userImage.isEmpty)
-                  ? Text(
-                      user?.username[0].toUpperCase() ?? "U",
-                      style: TextStyle(fontSize: 40, color: theme.colorScheme.primary),
-                    )
-                  : null,
+    // Check if user is logged in or Guest
+    final bool isGuest = (user == null || user.username.isEmpty);
+
+    return Material(
+      color: theme.scaffoldBackgroundColor,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        child: Column(
+          children: [
+            // Profile Avatar
+            CircleAvatar(
+              radius: 55,
+              backgroundColor: theme.colorScheme.primary.withOpacity(0.1),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: !isGuest && user.userImage.isNotEmpty
+                    ? NetworkImage(user.userImage)
+                    : null,
+                child: isGuest || user.userImage.isEmpty
+                    ? Text(
+                        isGuest ? "G" : user.username[0].toUpperCase(),
+                        style: TextStyle(fontSize: 40, color: theme.colorScheme.primary),
+                      )
+                    : null,
+              ),
             ),
-          ),
 
-          const SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-          // Name
-          TitlesTextWidget(
-            label: user?.username ?? "Guest User",
-            fontSize: 24,
-            color: theme.textTheme.headlineSmall?.color,
-          ),
-
-          const SizedBox(height: 6),
-
-          // Email
-          SubtitleTextWidget(
-            label: user?.email ?? "No Email",
-            fontSize: 14,
-            color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
-          ),
-
-          const SizedBox(height: 24),
-
-          // Info Section
-          _buildInfoTile(
-            icon: Icons.person,
-            title: 'Username',
-            value: user?.username ?? 'Guest',
-            theme: theme,
-          ),
-          _buildInfoTile(
-            icon: Icons.location_on,
-            title: 'Location',
-            value: 'Nairobi, Kenya',
-            theme: theme,
-          ),
-          _buildInfoTile(
-            icon: Icons.security,
-            title: 'Role',
-            value: user?.role ?? 'user',
-            theme: theme,
-          ),
-
-          const SizedBox(height: 30),
-
-          // Buttons
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.edit),
-              label: const TitlesTextWidget(label: 'Edit Profile', color: Colors.white),
-              onPressed: () {
-                // TODO: Navigate to Edit Profile Screen
-              },
+            // Name
+            TitlesTextWidget(
+              label: isGuest ? "Guest User" : user.username,
+              fontSize: 24,
+              color: theme.textTheme.headlineSmall?.color,
             ),
-          ),
-          const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              icon: const Icon(Icons.logout),
-              label: TitlesTextWidget(label: 'Logout', color: Colors.red),
-              onPressed: () {
-                // TODO: Call AuthProvider to sign out
-              },
-            ),
-          ),
 
-          const SizedBox(height: 20),
-        ],
+            const SizedBox(height: 6),
+
+            // Email
+            SubtitleTextWidget(
+              label: isGuest ? "Please login or register" : user.email,
+              fontSize: 14,
+              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
+            ),
+
+            const SizedBox(height: 24),
+
+            // Info Section (Hide for guests or show placeholder)
+            _buildInfoTile(
+              icon: Icons.person,
+              title: 'Username',
+              value: isGuest ? 'Guest' : user.username,
+              theme: theme,
+            ),
+            _buildInfoTile(
+              icon: Icons.location_on,
+              title: 'Location',
+              value: 'Nairobi, Kenya',
+              theme: theme,
+            ),
+            _buildInfoTile(
+              icon: Icons.security,
+              title: 'Role',
+              value: isGuest ? 'guest' : user.role,
+              theme: theme,
+            ),
+
+            const SizedBox(height: 30),
+
+            // --- CONDITIONAL BUTTONS ---
+
+            if (isGuest) ...[
+              // GUEST: Show Create Account
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.person_add),
+                  label: const TitlesTextWidget(label: 'Create Account', color: Colors.white),
+                  onPressed: () {
+                    // Navigate to Signup
+                    Navigator.pushReplacementNamed(context, RegisterScreen.routeName);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ] else ...[
+              // LOGGED IN: Show Edit Profile
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  icon: const Icon(Icons.edit),
+                  label: TitlesTextWidget(label: 'Edit Profile', color: theme.colorScheme.primary),
+                  onPressed: () {
+                    // TODO: Navigate to Edit Profile Screen
+                    Navigator.pushNamed(context, EditProfileScreen.routeName);
+                  },
+                ),
+              ),
+              const SizedBox(height: 12),
+              // LOGGED IN: Show Logout
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.logout),
+                  label: const TitlesTextWidget(label: 'Logout', color: Colors.white),
+                  onPressed: () async {
+                    // IMPLEMENTED LOGOUT LOGIC
+                     userProvider.clearUser();
+                    if (context.mounted) {
+                      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+              ),
+            ],
+
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

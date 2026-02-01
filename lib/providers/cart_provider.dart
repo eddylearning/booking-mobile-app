@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fresh_farm_app/services/database_service.dart';
+// import 'package:fresh_farm_app/services/database_service.dart';
 
 class CartProvider extends ChangeNotifier {
   // We store cart items as a List of Maps: [{'id': ..., 'qty': ...}]

@@ -85,14 +85,14 @@ class AppManager {
           print("No user logged in.");
         }
         // Navigate to Login
-        return LoginScreen.routName;
+        return LoginScreen.routeName;
       }
     } catch (e) {
       if (kDebugMode) {
         print("Error determining initial route: $e");
       }
       // Fallback to Login if anything goes wrong
-      return LoginScreen.routName;
+      return LoginScreen.routeName;
     }
   }
 
