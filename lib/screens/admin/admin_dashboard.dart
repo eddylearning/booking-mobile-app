@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/screens/admin/admin_reports_screen.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
+// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
+import 'package:fresh_farm_app/screens/admin/manage_products_screen.dart';
+import 'package:fresh_farm_app/screens/admin/add_product_screen.dart';
+import 'package:fresh_farm_app/screens/admin/admin_orders_screen.dart';
+// import 'package:fresh_farm_app/screens/admin/admin_reports_screen.dart';
 
 class AdminDashboard extends StatelessWidget {
   static const routeName = '/admin_dashboard';
@@ -27,37 +33,33 @@ class AdminDashboard extends StatelessWidget {
             crossAxisSpacing: 20,
             childAspectRatio: 1.1,
             children: [
+              // Manage Products (View/Delete)
               _buildAdminCard(
                 title: "Manage Products",
-                icon: Icons.shopping_basket,
+                icon: Icons.edit_note,
                 color: Colors.green,
-                onTap: () {
-                  // TODO: Navigate
-                },
+                onTap: () => Navigator.pushNamed(context, ManageProductsScreen.routeName),
               ),
+              // View Orders (Payments)
               _buildAdminCard(
                 title: "View Orders",
-                icon: Icons.list_alt,
+                icon: Icons.receipt_long,
                 color: Colors.blue,
-                onTap: () {
-                  // TODO: Navigate
-                },
+                onTap: () => Navigator.pushNamed(context, AdminOrdersScreen.routeName),
               ),
+              // Add Product
               _buildAdminCard(
                 title: "Add Product",
                 icon: Icons.add_circle_outline,
                 color: Colors.orange,
-                onTap: () {
-                  // TODO: Navigate
-                },
+                onTap: () => Navigator.pushNamed(context, AddProductScreen.routeName),
               ),
+              // Reports
               _buildAdminCard(
-                title: "Users",
-                icon: Icons.people,
-                color: Colors.purple,
-                onTap: () {
-                  // TODO: Navigate
-                },
+                title: "Reports",
+                icon: Icons.download,
+                color: Colors.redAccent,
+                onTap: () => Navigator.pushNamed(context, AdminReportsScreen.routeName),
               ),
             ],
           ),
