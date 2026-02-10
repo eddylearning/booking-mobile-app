@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm_app/providers/product_provider.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
 import 'package:provider/provider.dart';
-import 'package:fresh_farm_app/widgets/image_picker.dart'; // Import correct widget
+// import 'package:fresh_farm_app/widgets/image_picker.dart'; // Import correct widget
 // import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
 import 'package:image_picker/image_picker.dart';
 

@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_farm_app/models/product_model.dart';
+// import 'package:fresh_farm_app/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({

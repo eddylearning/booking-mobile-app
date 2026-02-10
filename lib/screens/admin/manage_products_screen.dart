@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm_app/services/database_service.dart';
-import 'package:fresh_farm_app/screens/admin/add_product_screen.dart';
-import 'package:fresh_farm_app/widgets/subtitle_text.dart';
-import 'package:fresh_farm_app/widgets/title_text.dart';
-// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
-// import 'package:fresh_farm_app/widgets/subtitle_text_widget.dart';
 
 class ManageProductsScreen extends StatelessWidget {
   static const routeName = '/manage_products';
@@ -14,88 +9,45 @@ class ManageProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const TitlesTextWidget(label: "Manage Products")),
+      appBar: AppBar(
+        title: const Text('Manage Products'),
+      ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: DatabaseService.instance.fetchProductsForAdmin().asStream(), // Helper needed or use simple snapshot
+        stream: DatabaseService.instance.fetchProductsForAdmin(),
         builder: (context, snapshot) {
-          if (snapshot.hasError) return const Center(child: Text("Error loading"));
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          
-          final products = snapshot.data!.docs;
 
-          if (products.isEmpty) {
-            return const Center(child: SubtitleTextWidget(label: "No products found"));
+          if (snapshot.hasError) {
+            return const Center(child: Text('Failed to load products'));
+          }
+
+          final docs = snapshot.data?.docs ?? [];
+
+          if (docs.isEmpty) {
+            return const Center(child: Text('No products found'));
           }
 
           return ListView.builder(
-            itemCount: products.length,
+            itemCount: docs.length,
             itemBuilder: (context, index) {
-              final product = products[index];
-              final data = product.data() as Map<String, dynamic>;
+              final data = docs[index].data() as Map<String, dynamic>;
+
               return Card(
-                margin: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(data['imageUrl'] ?? ''),
-                  ),
-                  title: TitlesTextWidget(label: data['name']),
-                  subtitle: SubtitleTextWidget(label: "KES ${data['price']}"),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Edit
-                      IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.blue),
-                        onPressed: () {
-                          // Pass product data to Edit screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddProductScreen(productData: data, productId: product.id),
-                            ),
-                          );
-                        },
-                      ),
-                      // Delete
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () async {
-                          // Confirmation dialog
-                          final confirm = await _confirmDelete(context, data['name']);
-                          if (confirm == true) {
-                            DatabaseService.instance.deleteProduct(product.id);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                  title: Text(data['name'] ?? 'Unnamed Product'),
+                  subtitle: Text('Price: ${data['price']}'),
+                  trailing: Text('Stock: ${data['stock']}'),
                 ),
               );
             },
           );
         },
-      ),
-    );
-  }
-
-  Future<bool?> _confirmDelete(BuildContext context, String name) {
-    return showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Delete Product"),
-        content: Text("Are you sure you want to delete $name?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text("Cancel"),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text("Delete", style: TextStyle(color: Colors.red)),
-          ),
-        ],
       ),
     );
   }

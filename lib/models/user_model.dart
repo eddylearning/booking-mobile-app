@@ -60,6 +60,8 @@ class UserModel {
     );
   }
 
+  Null get phoneNumber => null;
+
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
