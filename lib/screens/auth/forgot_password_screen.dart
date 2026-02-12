@@ -9,6 +9,7 @@
 //   }
 // }
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -32,27 +33,45 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     super.dispose();
   }
 
-  Future<void> _resetPassword() async {
+    Future<void> _resetPassword() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
 
     try {
-      // TODO: Connect your auth service here
-      // Example (Firebase):
-      // await FirebaseAuth.instance
-      //     .sendPasswordResetEmail(email: _emailController.text.trim());
-
-      await Future.delayed(const Duration(seconds: 2)); // mock delay
+      //  FIREBASE LOGIC
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailController.text.trim()
+      );
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password reset link sent!')),
+        const SnackBar(
+          content: Text('Password reset link sent to your email!'),
+          backgroundColor: Colors.green,
+        ),
       );
-      Navigator.pop(context);
+      Navigator.pop(context); // Go back to login screen
+    } on FirebaseAuthException catch (e) {
+      // HANDLE ERRORS 
+      String errorMessage = "An error occurred";
+      if (e.code == 'user-not-found') {
+        errorMessage = "No user found with this email.";
+      } else if (e.code == 'invalid-email') {
+        errorMessage = "The email address is badly formatted.";
+      }
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
+        SnackBar(content: Text('Error: $e')),
       );
     } finally {
       if (mounted) setState(() => _isLoading = false);

@@ -180,8 +180,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late final TextEditingController _nameController, _emailController, _passwordController, _repeatPasswordController;
   late final FocusNode _nameFocusNode, _emailFocusNode, _passwordFocusNode, _repeatPasswordFocusNode;
   
-  // Default role for public registration is 'customer' (or 'user' in your old code)
-  // We will map 'user' to 'customer' logic later.
+  // Default role for public registration is 'customer' 
+  // map 'user' to 'customer' logic later.
   String role = 'customer'; 
   bool isLoading = false;
   late String userImageUrl;
@@ -216,7 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  Future<void> LocalImagePicker() async {
+  Future<void> localImagePicker() async {
     final ImagePicker imagePicker = ImagePicker();
     await MyAppFunctions.imagePickerDialog(
       context: context,
@@ -322,16 +322,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       TitlesTextWidget(label: "Create Account"),
                       SubtitleTextWidget(label: "Join the farming community"),
-                    ]),
-                    
+
+                      const SizedBox(height:10),
+                      //to login
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          alignment: Alignment.centerLeft,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: const Text("Already have an account? Login",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        ),
+                        )
+                    ]),  
                   ),
+
                   const SizedBox(height: 20),
                   SizedBox(
                     height: size.width * 0.2,
                     width: size.width * 0.2,
                     child: PickImageWidget(
                       pickedImageBytes: _pickedImageBytes,
-                      onTap: () async => await LocalImagePicker(),
+                      onTap: () async => await localImagePicker(),
                     ),
                   ),
                   const SizedBox(height:20),

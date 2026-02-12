@@ -93,7 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final errorMessage = await userProvider.login(
         _emailController.text.trim(),
-        _passwordController.text.trim(),
+        _passwordController.text,
+        context,
       );
 
       if (errorMessage != null && mounted) {
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
      setState(() => _isLoading = true);
      final userProvider = Provider.of<UserProvider>(context, listen: false);
      
-     final error = await userProvider.signInWithGoogle();
+     final error = await userProvider.signInWithGoogle(context);
      
      if (mounted) {
         if (error != null) {

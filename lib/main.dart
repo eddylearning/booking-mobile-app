@@ -72,7 +72,15 @@ import 'package:fresh_farm_app/firebase_options.dart';
 import 'package:fresh_farm_app/providers/cart_provider.dart';
 import 'package:fresh_farm_app/providers/product_provider.dart';
 import 'package:fresh_farm_app/root_screen.dart';
+import 'package:fresh_farm_app/screens/admin/add_product_screen.dart';
+import 'package:fresh_farm_app/screens/admin/admin_orders_screen.dart';
+import 'package:fresh_farm_app/screens/admin/admin_reports_screen.dart';
+import 'package:fresh_farm_app/screens/admin/manage_products_screen.dart';
+import 'package:fresh_farm_app/screens/checkout_screen.dart';
+import 'package:fresh_farm_app/screens/edit_profile_screen.dart';
+import 'package:fresh_farm_app/screens/help_screen.dart';
 import 'package:fresh_farm_app/screens/order_screen.dart';
+import 'package:fresh_farm_app/screens/product_details_screen.dart';
 import 'package:fresh_farm_app/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:fresh_farm_app/providers/theme_provider.dart';
@@ -116,7 +124,7 @@ class MyApp extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     // Fetch user data on app start (Ideally, do this in a Splash Screen)
-    userProvider.fetchUser();
+    userProvider.fetchUser(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -137,12 +145,20 @@ class MyApp extends StatelessWidget {
         // Main App Routes
         RootScreen.routeName: (ctx) => const RootScreen(),
         
-        // --- CHANGE 3: Added Admin Dashboard Route ---
+        // --- CHANGE 3: Added Admin Dashboard  and other Routes ---
         AdminDashboard.routeName: (ctx) => const AdminDashboard(),
+        ManageProductsScreen.routeName:(ctx) => ManageProductsScreen(),
+        AddProductScreen.routeName:(ctx) => AddProductScreen(),
+        AdminOrdersScreen.routeName:(ctx) => AdminOrdersScreen(),
+        AdminReportsScreen.routeName:(ctx) => AdminReportsScreen(),
         CartScreen.routeName: (ctx) => const CartScreen(), // Added for Drawer navigation
         // Add other routes (OrdersScreen, ProfileScreen) if needed
          OrdersScreen.routeName: (ctx) => const OrdersScreen(),
         ProfileScreen.routeName: (ctx) => const ProfileScreen(),
+        HelpScreen.routeName: (ctx) => const HelpScreen(),
+        CheckoutScreen.routeName: (ctx) => const CheckoutScreen(),
+        EditProfileScreen.routeName:(ctx) => const EditProfileScreen(),
+        ProductDetailsScreen.routeName:(ctx) => const ProductDetailsScreen(),
       },
     );
   }

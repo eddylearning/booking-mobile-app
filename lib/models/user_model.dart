@@ -35,6 +35,7 @@ class UserModel {
   final List userCart;
   final List userWish;
   final String role;
+  
 
   UserModel({
     required this.uid,

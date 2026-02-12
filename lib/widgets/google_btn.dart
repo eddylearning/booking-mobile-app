@@ -83,7 +83,7 @@ class GoogleButton extends StatelessWidget {
       // =======================
       final userProvider =
           Provider.of<UserProvider>(context, listen: false);
-      await userProvider.fetchUser();
+      await userProvider.fetchUser(context);
 
       // =======================
       //  NAVIGATE

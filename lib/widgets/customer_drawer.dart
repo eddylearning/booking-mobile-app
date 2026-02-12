@@ -155,24 +155,22 @@
 //   }
 // }
 
+
 import 'package:flutter/material.dart';
 import 'package:fresh_farm_app/screens/order_screen.dart';
+// import 'package:fresh_farm_app/screens/orders_screen.dart'; // Updated import
+import 'package:fresh_farm_app/screens/help_screen.dart'; // NEW IMPORT
 import 'package:fresh_farm_app/widgets/title_text.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:fresh_farm_app/models/user_model.dart';
 import 'package:fresh_farm_app/providers/theme_provider.dart';
 import 'package:fresh_farm_app/providers/user_provider.dart';
-// import 'package:fresh_farm_app/screens/customer/orders_screen.dart';
 import 'package:fresh_farm_app/screens/admin/admin_dashboard.dart';
-// import 'package:fresh_farm_app/root_screen.dart';
-// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
-// import 'package:fresh_farm_app/widgets/subtitle_text_widget.dart';
 
 class CustomerDrawer extends StatelessWidget {
   const CustomerDrawer({super.key, required this.onPageChange});
 
-  // --- NEW: Callback to change RootScreen Tabs ---
   final Function(int) onPageChange;
 
   @override
@@ -213,29 +211,29 @@ class CustomerDrawer extends StatelessWidget {
             ),
           ),
 
-          // Home (Tab 0)
+          // Home
           _buildListTile(
             context: context,
             icon: IconlyBroken.home,
             title: "Home",
             onTap: () {
-              Navigator.pop(context); // Close drawer
-              onPageChange(0); // Switch to Home Tab
+              Navigator.pop(context);
+              onPageChange(0);
             },
           ),
 
-          // Cart (Tab 2) - FIXED: Use Tab Switch instead of Push
+          // Cart
           _buildListTile(
             context: context,
             icon: IconlyBroken.buy,
             title: "My Cart",
             onTap: () {
               Navigator.pop(context);
-              onPageChange(2); // Switch to Cart Tab
+              onPageChange(2);
             },
           ),
 
-          // Orders (NOT a tab) - Use PushNamed
+          // Orders
           _buildListTile(
             context: context,
             icon: IconlyBroken.paper,
@@ -245,18 +243,29 @@ class CustomerDrawer extends StatelessWidget {
             },
           ),
 
-          // Profile (Tab 3) - FIXED: Use Tab Switch instead of Push
+          // Profile
           _buildListTile(
             context: context,
             icon: IconlyBroken.profile,
             title: "My Profile",
             onTap: () {
               Navigator.pop(context);
-              onPageChange(3); // Switch to Profile Tab
+              onPageChange(3);
             },
           ),
 
           const Divider(),
+
+          // --- NEW HELP BUTTON ---
+          _buildListTile(
+            context: context,
+            icon: IconlyBroken.info_square,
+            title: "Help & Support",
+            onTap: () {
+              Navigator.pushNamed(context, HelpScreen.routeName);
+            },
+          ),
+          // ---------------------
 
           // Admin
           if (currentUser?.role == "admin")

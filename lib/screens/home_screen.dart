@@ -42,6 +42,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/screens/product_details_screen.dart';
 import 'package:fresh_farm_app/services/database_service.dart';
 import 'package:fresh_farm_app/widgets/product_card.dart';
 import 'package:fresh_farm_app/widgets/shimmer_loader.dart';
@@ -114,8 +115,12 @@ class HomeScreen extends StatelessWidget {
                     price: product['price'].toDouble(),
                     imageUrl: product['imageUrl'] ?? 'https://via.placeholder.com/150',
                     onTap: () {
-                      // TODO: Navigate to Product Detail
-                    },
+                        Navigator.pushNamed(
+                          context, 
+                          ProductDetailsScreen.routeName,
+                          arguments: product.id, // Passing the Document ID
+                        );
+                      },
                   );
                 },
               );

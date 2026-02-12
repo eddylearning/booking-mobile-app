@@ -13,7 +13,14 @@ class AdminDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Admin Dashboard"),
+        centerTitle: true,
+      ),
+    
+    body: SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
@@ -65,6 +72,7 @@ class AdminDashboard extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 
