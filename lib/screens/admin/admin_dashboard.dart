@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_farm_app/screens/admin/admin_reports_screen.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
-// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
 import 'package:fresh_farm_app/screens/admin/manage_products_screen.dart';
 import 'package:fresh_farm_app/screens/admin/add_product_screen.dart';
 import 'package:fresh_farm_app/screens/admin/admin_orders_screen.dart';
-// import 'package:fresh_farm_app/screens/admin/admin_reports_screen.dart';
 
 class AdminDashboard extends StatelessWidget {
   static const routeName = '/admin_dashboard';
@@ -13,14 +11,9 @@ class AdminDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Admin Dashboard"),
-        centerTitle: true,
-      ),
-    
-    body: SingleChildScrollView(
+    // REMOVED THE SCAFFOLD WRAPPER. Just return the content.
+    // This makes it a pure "tab" content for the AdminRootScreen.
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
@@ -40,28 +33,24 @@ class AdminDashboard extends StatelessWidget {
             crossAxisSpacing: 20,
             childAspectRatio: 1.1,
             children: [
-              // Manage Products (View/Delete)
               _buildAdminCard(
                 title: "Manage Products",
                 icon: Icons.edit_note,
                 color: Colors.green,
                 onTap: () => Navigator.pushNamed(context, ManageProductsScreen.routeName),
               ),
-              // View Orders (Payments)
               _buildAdminCard(
                 title: "View Orders",
                 icon: Icons.receipt_long,
                 color: Colors.blue,
                 onTap: () => Navigator.pushNamed(context, AdminOrdersScreen.routeName),
               ),
-              // Add Product
               _buildAdminCard(
                 title: "Add Product",
                 icon: Icons.add_circle_outline,
                 color: Colors.orange,
                 onTap: () => Navigator.pushNamed(context, AddProductScreen.routeName),
               ),
-              // Reports
               _buildAdminCard(
                 title: "Reports",
                 icon: Icons.download,
@@ -72,7 +61,6 @@ class AdminDashboard extends StatelessWidget {
           ),
         ],
       ),
-    )
     );
   }
 

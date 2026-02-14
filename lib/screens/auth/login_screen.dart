@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_farm_app/admin_root_screen.dart';
 import 'package:fresh_farm_app/utils/my_validators.dart';
 import 'package:fresh_farm_app/screens/auth/forgot_password_screen.dart';
 import 'package:fresh_farm_app/screens/auth/signup_screen.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> _loginFct(BuildContext context) async {
+    Future<void> _loginFct(BuildContext context) async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (!isValid) return;
@@ -103,10 +104,16 @@ class _LoginScreenState extends State<LoginScreen> {
       }
 
       if (mounted) {
-        // UserProvider now holds the role via fetchUserData
-        // final user = userProvider.getUser;
-        // Both admin and customer go to RootScreen, the Drawer will adapt
-        Navigator.pushReplacementNamed(context, RootScreen.routeName);
+        // --- FIX: CHECK ROLE AND ROUTE CORRECTLY ---
+        final user = userProvider.getUser;
+
+        if (user?.role == "admin") {
+          // Go to Admin App (with Admin Drawer)
+          Navigator.pushReplacementNamed(context, AdminRootScreen.routeName);
+        } else {
+          // Go to Customer App (with Bottom Nav)
+          Navigator.pushReplacementNamed(context, RootScreen.routeName);
+        }
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -121,9 +128,16 @@ class _LoginScreenState extends State<LoginScreen> {
      
      if (mounted) {
         if (error != null) {
-           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
         } else {
-           Navigator.pushReplacementNamed(context, RootScreen.routeName);
+          // ROLE AND ROUTE  ---
+          final user = userProvider.getUser;
+          if (user?.role == "admin") {
+            Navigator.pushReplacementNamed(context, AdminRootScreen.routeName);
+          } else {
+            Navigator.pushReplacementNamed(context, RootScreen.routeName);
+          }
         }
      }
      if (mounted) setState(() => _isLoading = false);

@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fresh_farm_app/services/database_service.dart';
 import 'package:fresh_farm_app/widgets/subtitle_text.dart';
 import 'package:fresh_farm_app/widgets/title_text.dart';
-// import 'package:fresh_farm_app/widgets/titles_text_widget.dart';
-// import 'package:fresh_farm_app/widgets/subtitle_text_widget.dart';
 
 class AdminOrdersScreen extends StatelessWidget {
   static const routeName = '/admin_orders';
@@ -13,9 +11,7 @@ class AdminOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const TitlesTextWidget(label: "View Orders & Payments"),
-      ),
+      // REMOVED THE APPBAR HERE - AdminRootScreen handles the title
       body: StreamBuilder<QuerySnapshot>(
         stream: DatabaseService.instance.getAllOrders(),
         builder: (context, snapshot) {
@@ -24,6 +20,7 @@ class AdminOrdersScreen extends StatelessWidget {
           final orders = snapshot.data!.docs;
 
           return ListView.builder(
+            padding: const EdgeInsets.only(top: 10), // Added top padding
             itemCount: orders.length,
             itemBuilder: (context, index) {
               final order = orders[index];
