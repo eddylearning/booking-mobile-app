@@ -121,9 +121,9 @@ class ManageProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Manage Products'),
-      // ),
+      appBar: AppBar(
+        title: const Text('Manage Products'),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: DatabaseService.instance.fetchProductsForAdmin(),
         builder: (context, snapshot) {
